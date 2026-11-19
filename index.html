@@ -1,4 +1,5 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>АТЛАНТ — живой дашборд</title>
+<link rel="icon" type="image/png" href="assets/atlant-original-transparent.png">
 <style>
 :root{--bg:#0b0f17;--p:#121826;--p2:#1a2233;--g:#4da3ff;--t:#e6edf7;--m:#8fa0b8;--up:#2fd08a;--dn:#ff5c70;--ln:#243049;--on:#0b0f17}[data-th=light]{--bg:#f1f5fb;--p:#ffffff;--p2:#e6edf8;--g:#1d63d8;--t:#0f1a2b;--m:#566580;--up:#12a35f;--dn:#d9344a;--ln:#cfd9e8}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:14px/1.45 system-ui,sans-serif}
@@ -16,8 +17,16 @@ table{width:100%;border-collapse:collapse}td,th{padding:7px 8px;border-bottom:1p
 .pnl{font-size:34px;font-weight:700}.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button.on{background:var(--g);color:#fff}
 .tw{overflow-x:auto}.tw table{min-width:1050px}.sym b{display:block}.tag{font-size:11px;padding:1px 6px;border-radius:4px;background:var(--p2);color:var(--m)}
 .big{display:grid;grid-template-columns:2fr 1fr;gap:12px}.big>*,.card{min-width:0}.tabs{flex-wrap:wrap}@media(max-width:800px){.big{grid-template-columns:1fr}main{padding:10px}header{padding:8px 10px;gap:6px}h1{font-size:16px}nav{order:3;flex:0 0 100%;flex-wrap:nowrap;overflow-x:auto;gap:2px}nav a{padding:6px 10px;white-space:nowrap}.pnl{font-size:26px}.v{font-size:20px}.card{padding:10px}.tabs button{padding:6px 9px}#cc{height:460px!important}}
-.tick{animation:fl .6s}@keyframes fl{from{background:#5fd39a44}to{background:none}}</style></head><body>
-<header><h1>АТЛАНТ</h1><nav id="nav"></nav><button id="thb" class="chip" onclick="setTh(document.documentElement.dataset.th=='light'?'dark':'light');this.textContent=document.documentElement.dataset.th=='light'?'Тёмная':'Светлая'" style="cursor:pointer;border:0">Светлая</button><span class="chip" id="mode">DEMO</span><span class="chip" id="live">…</span></header>
+.tick{animation:fl .6s}@keyframes fl{from{background:#5fd39a44}to{background:none}}/* The original symbol IS the initial A: one continuous wordmark. */
+.brand{display:inline-flex;align-items:center;color:var(--t);text-decoration:none;border-radius:4px;margin-right:10px;flex:none}
+.brand h1{display:flex;align-items:center;gap:0;margin:0;color:var(--t);font-size:25px;line-height:1;font-weight:750;letter-spacing:1.8px}
+.brand-initial{width:22px;height:32px;object-fit:cover;flex:none;margin-right:1px;filter:brightness(1.9)}
+.brand-tail{display:block;padding-top:2px}
+.brand:focus-visible{outline:2px solid var(--g);outline-offset:5px}
+[data-th=light] .brand-initial{filter:none}
+@media(max-width:800px){.brand{margin-right:5px}.brand h1{font-size:22px;letter-spacing:1.5px}.brand-initial{width:20px;height:29px;object-fit:cover}}
+</style></head><body>
+<header><a class="brand" href="#overview" aria-label="АТЛАНТ — обзор"><h1 aria-label="АТЛАНТ"><img class="brand-initial" src="assets/atlant-original-transparent.png" alt="" width="36" height="36"><span class="brand-tail" aria-hidden="true">ТЛАНТ</span></h1></a><nav id="nav"></nav><button id="thb" class="chip" onclick="setTh(document.documentElement.dataset.th=='light'?'dark':'light');this.textContent=document.documentElement.dataset.th=='light'?'Тёмная':'Светлая'" style="cursor:pointer;border:0">Светлая</button><span class="chip" id="mode">DEMO</span><span class="chip" id="live">…</span></header>
 <main>
 <section class="pg" id="p-overview"><div class="card" style="padding:0;overflow:hidden;position:relative"><canvas id="hero" style="height:min(470px,128vw);width:100%"></canvas></div><div class="card"><div class="k">Итоговый P&amp;L (нереализованный + реализованный)</div><div class="pnl" id="bigpnl">—</div><small id="bigsub"></small></div>
 <div class="big"><div class="card"><div class="tabs" id="rtabs"></div><canvas id="c1" style="height:320px"></canvas><small id="rinfo"></small></div><div class="card"><b>Индекс страха и жадности</b><canvas id="fg1" style="height:230px"></canvas><small id="fgi"></small></div></div>
