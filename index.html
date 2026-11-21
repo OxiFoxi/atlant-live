@@ -428,7 +428,7 @@ tkFetch();route();pull();setInterval(pull,10000);
 window.V=window.V||{};window.V.ov=window.V.ov||{ema20:1,ema50:0,bb:0};window.V.fib=window.V.fib||0;window.V.tool=window.V.tool||"";window.V.rl=window.V.rl||null;
 const TFMIN={"1":1,"5":5,"15":15,"60":60,"240":240,"D":1440};
 window.TK={d:{},t:0,ready:0};
-function tkFetch(){try{fetch("https://api.bybit.com/v5/market/tickers?category=linear").then(r=>r.json()).then(j=>{const L=(j.result&&j.result.list)||[];const d={};for(const t of L){if(!/USDT$/.test(t.symbol))continue;d[t.symbol]={px:+t.lastPrice,ch:+t.price24hPcnt,v:+t.volume24h,to:+t.turnover24h}}window.TK.d=d;window.TK.t=Date.now();window.TK.ready=1;idleDraw()}).catch(()=>{})}catch(e){}}
+function tkFetch(){try{fetch("https://api.bybit.com/v5/market/tickers?category=linear").then(r=>r.json()).then(j=>{const L=(j.result&&j.result.list)||[];const d={};for(const t of L){if(!/USDT$/.test(t.symbol))continue;d[t.symbol]={px:+t.lastPrice,ch:+t.price24hPcnt*100,v:+t.volume24h,to:+t.turnover24h}}window.TK.d=d;window.TK.t=Date.now();window.TK.ready=1;idleDraw()}).catch(()=>{})}catch(e){}}
 setInterval(()=>{if(!window.TK.t||Date.now()-window.TK.t>45000)tkFetch()},15000);
 function tk(sym){const T=window.TK.d||{};if(T[sym])return T[sym];const S=(typeof D!=="undefined"&&D&&D.tk24)||{};if(S[sym])return S[sym];return null}
 function tfLabel(ts,tf){const d=new Date(ts),z=n=>String(n).padStart(2,"0");const s=z(d.getDate())+"."+z(d.getMonth()+1)+" "+z(d.getHours())+":"+z(d.getMinutes());const m=TFMIN[tf]||1;if(tf=="D")return s+" (день)";const e=new Date(ts+m*60000),e2=z(e.getDate())+"."+z(e.getMonth()+1)+" "+z(e.getHours())+":"+z(e.getMinutes());return s+" → "+e2}
